@@ -1,0 +1,38 @@
+{% extends "base.html" %} 
+#----Navagation 
+{% set active_path = 'path' %}  
+{%block title%}changed{%
+endblock title%}
+
+{%block body%} 
+<!--BUTTONS-->
+<div class="btn-group d-flex container pb-3 pt-3" role="group" aria-label="Button group with nested dropdown">
+  <button type="button" class="btn btn-outline-secondary" id="clear_table">Clear Table</button>
+  <button type="button" class="btn btn-outline-secondary">Place Target</button>
+  <button type="button" class="btn btn-outline-secondary">Place Flag</button>
+  <button type="button" class="btn btn-outline-secondary">Find Path</button>
+
+  <div class="btn-group" role="group">
+    <button id="btnGroupDrop1" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Search Algorithm
+    </button>
+    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+      <a class="dropdown-item" href="#">Dropdown link</a>
+      <a class="dropdown-item" href="#">Dropdown link</a>
+    </div>
+  </div>
+</div>
+<!--TABLE-->
+<div>
+  <table id ="path_upper_table" class="center noselect " oncontextmenu="return false;">
+      <tbody id = "path_table">
+      </tbody>
+  </table>
+</div>
+
+<script
+        type="module"
+        src="{{ url_for('static', filename='js/path.js') }}"
+></script>
+
+{%endblock body%}

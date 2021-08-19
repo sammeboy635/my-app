@@ -1,0 +1,39 @@
+.unvisited {
+  border: 1px solid rgb(175, 216, 248);
+  background-color: white;
+  width: 25px;
+  height: 25px;
+}
+.visited {
+  border: 1px solid rgb(175, 216, 248);
+  background-color: rgb(53, 40, 40);
+  animation-name: visitedAnimation;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+  width: 25px;
+  height: 25px;
+}
+.target {
+  border: 1px solid rgb(175, 216, 248);
+  background-color: orange;
+  width: 25px;
+  height: 25px;
+}
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}

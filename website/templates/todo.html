@@ -1,0 +1,37 @@
+{% extends "base.html" %} 
+#----Navagation 
+{% set active_path = 'todo' %}  
+{%block title%}changed{%
+endblock title%}
+
+{%block body%}  
+<!--Input-->
+<div class="d-md-flex justify-content-center input-group-lg p-5">
+    <input id="todo_input" type="text" class="form-control" placeholder="Add A Todo" aria-label="Username">
+    <button class="btn btn-outline-primary btn-lg" onclick="addTodo()">Add</button>
+</div>
+<!--TodoList-->
+<div>
+    <table class="table table-dark table-striped ">
+        <thead class="">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Todo Item</th>
+                <th scope="col">Completed</th>               
+            </tr>
+        </thead>
+        <tbody id="todo_list">
+            <!--<tr>
+                <th scope="row">1</th>
+                <th scope="row">Testing Item</th>
+                <th scope="row">Not</th>
+            </tr>-->
+        </tbody>
+      </table>
+</div>
+
+<script
+        type="text/javascript"
+        src="{{ url_for('static', filename='js/todo.js') }}"
+></script>
+{%endblock body%}
