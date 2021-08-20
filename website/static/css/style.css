@@ -6,7 +6,7 @@
 }
 .visited {
   border: 1px solid rgb(175, 216, 248);
-  background-color: rgb(53, 40, 40);
+  background-color: seagreen;
   animation-name: visitedAnimation;
   animation-duration: 1.5s;
   animation-timing-function: ease-out;
@@ -21,6 +21,12 @@
 .target {
   border: 1px solid rgb(175, 216, 248);
   background-color: orange;
+  width: 25px;
+  height: 25px;
+}
+.flag {
+  border: 1px solid rgb(175, 216, 248);
+  background-color: rgb(189, 55, 55);
   width: 25px;
   height: 25px;
 }

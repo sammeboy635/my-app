@@ -8,9 +8,9 @@ endblock title%}
 <!--BUTTONS-->
 <div class="btn-group d-flex container pb-3 pt-3" role="group" aria-label="Button group with nested dropdown">
   <button type="button" class="btn btn-outline-secondary" id="clear_table">Clear Table</button>
-  <button type="button" class="btn btn-outline-secondary">Place Target</button>
-  <button type="button" class="btn btn-outline-secondary">Place Flag</button>
-  <button type="button" class="btn btn-outline-secondary">Find Path</button>
+  <button type="button" class="btn btn-outline-secondary" id="place_target">Place Target</button>
+  <button type="button" class="btn btn-outline-secondary" id="place_flag">Place Flag</button>
+  <button type="button" class="btn btn-outline-secondary" id="find_path">Find Path</button>
 
   <div class="btn-group" role="group">
     <button id="btnGroupDrop1" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -31,8 +31,16 @@ endblock title%}
 </div>
 
 <script
-        type="module"
-        src="{{ url_for('static', filename='js/path.js') }}"
+        type="text/javascript"
+        src="{{ url_for('static', filename='js/path/pathtable.js') }}"
+></script>
+<script
+        type="text/javascript"
+        src="{{ url_for('static', filename='js/path/path.js') }}"
+></script>
+<script
+        type="text/javascript"
+        src="{{ url_for('static', filename='js/path/pathbutton.js') }}"
 ></script>
 
 {%endblock body%}

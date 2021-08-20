@@ -1,19 +1,30 @@
-export class PathTable{
+
+
+class PathTable{
     constructor(width,height){
-        this.table = document.getElementById("path_table");;
+        this.table = document.getElementById("path_table");
         this.width = width;
         this.height = height;
         this.x;
         this.y;
 
         this.loadedTable = false;
-        this.tables = new Array(height);
-        for(let i = 0; i < height;i++){
-            this.tables[i] = new Array(width)
-        }
+        this.tables = new Array(height*width);
     }
-    
-    
+    //----ARRAY HANDLER
+    tables_set(index,blockItem){
+        this.tables[index] = blockItem;
+    }
+    tables_get(index){
+        return this.tables[index];
+    }
+
+    find_best_path(){
+        let target = parseInt(document.getElementsByClassName("target").id);
+        let flag = parseInt(document.getElementsByClassName("flag").id);
+        
+    }
+
     bounds_x_within(x){
         if(x >= this.width | x <= 0){
             return false;
@@ -27,6 +38,7 @@ export class PathTable{
         return true;
     }
 
+    //---GUI TABLE HANDLER
     createTable(){
 
         if(this.loadedTable == false){
@@ -66,34 +78,18 @@ export class PathTable{
         this.loadedTable = false;
         this.createTable();
     }
-}
-
-const website = document.getElementById("root");
-let mousedown = false;
-let mouseInput = 0;
-
-website.addEventListener("mousedown", function(e) {mousedown = true;mouseInput = e.button});
-website.addEventListener("mouseup", function() {mousedown = false});
-
-export function handleOnClick(id){
-    changeBlockClass(id);
-}
-export function handleOnEnter(id){
-    if(mousedown == true){
-        changeBlockClass(id);
+    //----MOUSE INPUT
+    mouseDown_get(){
+        return this.mouseDown;
+    }
+    mouseDown_set(mouseDown){
+        this.mouseDown = mouseDown;
+    }
+    mouseInput_set(mouseInput){
+        this.mouseInput = mouseInput;
+    }
+    mouseInput_get(){
+        return this.mouseInput;
     }
 }
-function changeBlockClass(id){
-    const block = document.getElementById(id);
-    if(mouseInput == 0){
-        block.classList.remove("unvisited");
-        block.classList.add("visited");
-    }else if(mouseInput == 2){
-        block.classList.remove("visited");
-        block.classList.add("unvisited");
-    }
-}
-
-export function clearTable(){
-    console.log('here');
-}
+ 
