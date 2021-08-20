@@ -1,72 +1,66 @@
 
 
-class PathTable{
-    constructor(width,height){
+class PathTable {
+    constructor(width, height) {
         this.table = document.getElementById("path_table");
-        this.width = width;
-        this.height = height;
         this.x;
         this.y;
+        this.width = width;
+        this.height = height;
 
+        this.grid = new Array(width).fill(new Array(height));
         this.loadedTable = false;
-        this.tables = new Array(height*width);
     }
-    //----ARRAY HANDLER
-    tables_set(index,blockItem){
-        this.tables[index] = blockItem;
-    }
-    tables_get(index){
-        return this.tables[index];
-    }
+    chan
+    //---Changing Block
+    changeBlockClass(id) {
+        const block = document.getElementById(id);
 
-    find_best_path(){
-        let target = parseInt(document.getElementsByClassName("target").id);
-        let flag = parseInt(document.getElementsByClassName("flag").id);
-        
-    }
+        //Parsing x and y values from id
+        let split = id.split("_");
+        let x = parseInt(split[0]);
+        let y = parseInt(split[1]);
 
-    bounds_x_within(x){
-        if(x >= this.width | x <= 0){
-            return false;
+        if (this.mouseInput == 0) { //Wall
+            this.grid[x][y] = WALL
+            block.classList.remove("noWall");
+            block.classList.add("wall");
+        } else if (this.mouseInput == 2) {//No Wall
+            this.grid[x][y] = NO_WALL
+            block.classList.remove("wall");
+            block.classList.add("noWall");
         }
-        return true;
-    }
-    bounds_y_within(y){
-        if(y >= this.height | y <= 0){
-            return false;
-        }
-        return true;
     }
 
     //---GUI TABLE HANDLER
-    createTable(){
+    createTable() {
 
-        if(this.loadedTable == false){
-            for(let i = 0; i < this.height;i++){
+        if (this.loadedTable == false) {
+            for (let i = 0;i < this.height;i++) {
                 this.y = i;
                 this.createRow();
             }
             this.loadedTable = true;
         }
     }
-    createRow(){
+    createRow() {
         const row = document.createElement('tr');
-        for(let i = 0; i < this.width;i++){
+        for (let i = 0;i < this.width;i++) {
             this.x = i;
             row.appendChild(this.createBox());
         }
         this.table.appendChild(row);
     }
-    
-    createBox(){
+
+    createBox() {
         const block = document.createElement('td');
-        block.classList.add("unvisited");
-        block.id = String((this.y * this.width)+this.x);
-        block.onmousedown = (function() {handleOnClick(this.id)});
-        block.onmouseenter = (function() {handleOnEnter(this.id)});
+        block.classList.add("noWall");
+        block.id = String(this.x + "_" + this.y); // ID for html looks like "X_Y"
+        //block.onmousedown = (function () { handleOnClick(this.id) });
+        block.onmouseenter = (function () { handleOnEnter(this.id) });
         return block;
     }
-    clearTable(){
+    clearTable() {
         const parentNode = this.table.parentElement;
         const newTbody = document.createElement("tbody");
         newTbody.id = "path_table"
@@ -78,18 +72,4 @@ class PathTable{
         this.loadedTable = false;
         this.createTable();
     }
-    //----MOUSE INPUT
-    mouseDown_get(){
-        return this.mouseDown;
-    }
-    mouseDown_set(mouseDown){
-        this.mouseDown = mouseDown;
-    }
-    mouseInput_set(mouseInput){
-        this.mouseInput = mouseInput;
-    }
-    mouseInput_get(){
-        return this.mouseInput;
-    }
 }
- 
