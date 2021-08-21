@@ -18,6 +18,24 @@
   width: 25px;
   height: 25px;
 }
+.open {
+  border: 1px solid rgb(175, 216, 248);
+  background-color: greenyellow;
+  width: 25px;
+  height: 25px;
+}
+.closed {
+  border: 1px solid rgb(175, 216, 248);
+  background-color: blueviolet;
+  width: 25px;
+  height: 25px;
+}
+.path {
+  border: 1px solid rgb(175, 216, 248);
+  background-color: blue;
+  width: 25px;
+  height: 25px;
+}
 .target {
   border: 1px solid rgb(175, 216, 248);
   background-color: orange;

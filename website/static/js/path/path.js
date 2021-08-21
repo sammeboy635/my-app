@@ -6,6 +6,9 @@ let NO_WALL = 0;
 let WALL = 1;
 let TARGET = 2;
 let FLAG = 3;
+let CLOSED = 4;
+let OPEN = 5;
+let PATH = 6;
 
 //---- On Window Load
 window.onload = function () {

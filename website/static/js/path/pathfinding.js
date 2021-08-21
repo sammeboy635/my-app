@@ -1,10 +1,14 @@
+class spot{
+    constructor(){
+        this.x = x;
+        this.y = y;
+        this.visited = true;
+    }
+}
 class PathFinding{
     constructor(width,height, sx, sy, ex,ey){
         this.openSet = [];
-        this.newOpenSet = [];
-
-        this.closedSet = [];
-        this.newClosedSet = [];
+        this.visitedSet = new Array(height*width);
 
         this.width = width;
         this.height = height;
@@ -15,35 +19,83 @@ class PathFinding{
         this.ex = ex;
         this.ey = ey;
 
-        this.grid = new Array[height];
-        for(let i = 0;i<height;i++){
-            grid[i] = new Array[width]
+        this.grid = new Array[this.height];
+        for(let i = 0;i<this.height;i++){
+            this.grid[i] = new Array[this.width]
+        }
+
+        this.priotyX = [];
+        this.priotyY = [];
+    }
+    
+    Find_Path(x,y,side){
+        handleDrawBlock((y * this.width)+x,PATH)
+        switch(side){
+            case"right":
+            this.handleMovingRight(x,y);
+            break;
+            case"down":
+            this.handleMovingDown(x,y);
+            break;
+            case"left":
+            this.handleMovingLeft(x,y);
+            break;
+            case"up":
+            this.handleMovingUp(x,y);
+            break;
+
+        }
+        
+    }
+    handleMovingRight(x,y){
+        if(x != this.width-1 &!this.visitedSet[((y) * this.width)+(x+1)]){
+            if(grid[x+1,y] != WALL){
+                this.visitedSet[(y * this.width)+x] += 1;
+                this.Find_Path(x+1,y,"right");
+            }else{
+                this.Find_Path(x+1,y,"right");
+            }
+        }else{
+            this.Find_Path(x,y,"down");
         }
     }
-    Find_Path(){
-        let openLength = this.openSet.length;
-        if(openLength > 0){
-            var winner = 0;
-            for(let i = 0; i < openLength;i++){
-                if(this.openSet[i].f < this.openSet[winner].f){
-                    winner = i;
-                }
+    handleMovingDown(x,y){
+        if(y > 0 & !this.visitedSet[((y-1) * this.width)+x]){
+            if(this.grid[x,y-1] != WALL){
+                this.visitedSet[(y * this.width)+x] += 1;
+                this.Find_Path(x+1,y,"right");
+            }else{
+                this.Find_Path(x,y-1,"right");
             }
-            var current = this.openSet[winner];
-            if(current == end){
-                console.log("Done!");
+        }else{
+            this.Find_Path(x,y,"left");
+        }
+    }
+    handleMovingLeft(x,y){
+        if(x > 0 & !this.visitedSet[((y) * this.width)+(x-1)]){
+            if(this.grid[x-1,y] != WALL){
+                this.visitedSet[(y * this.width)+x] += 1;
+                this.Find_Path(x-1,y,"right");
+            }else{
+                this.Find_Path(x-1,y,"right");
             }
-            this.openSet.remove(current);
-            this.closedSet.push(current);
-            
+        }else{
+            this.Find_Path(x,y,"down");
+        }
+    }
+    handleMovingUp(x,y){
+        let side = "";
+        if(y < this.height-1 & !this.visitedSet[((y+1) * this.width)+x]){
+            if(this.grid[x,y-1] != WALL){
+                this.visitedSet[(y * this.width)+x] += 1;
+                this.Find_Path(x+1,y,"right");
+            }else{
+                this.Find_Path(x+1,y,"right");
+            }
+
+        }else{
+            this.Find_Path(x,y,"right");
         }
     }
 }
-function spot(x,y){
-    this.x = x;
-    this.y = y;
-    this.f = 0;
-    this.g = 0;
-    this.h = 0;
-    this.neighbors = [];
-}
+

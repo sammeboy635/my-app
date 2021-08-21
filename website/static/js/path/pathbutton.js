@@ -30,7 +30,6 @@ function handleOnEnter(id) {
 //----Handle Active Button
 let active = "";
 function buttonRouter(index) {
-    if (active != "")
         switch (index) {
             case 1: //Enable Target
                 reverseButton(button_place_target);
@@ -42,6 +41,7 @@ function buttonRouter(index) {
                 break;
             case 3: //Find Path
                 reverseButton(button_find_path);
+                Tables.initFinding();
                 break;
         }
 }
@@ -56,14 +56,14 @@ function reverseButton(button) {
     }
 }
 function placeTarget() {
-    const block = document.getElementById("1-1");
+    const block = document.getElementById("1_1");
     block.classList.remove("unvisted", "visted");
     block.classList.add("target");
-    Tables.tables_set(26, TARGET);
+    Tables.grid[1][1] = TARGET;
 }
 function placeFlag() {
-    const block = document.getElementById("24-24");
+    const block = document.getElementById("23_23");
     block.classList.remove("unvisted", "visted");
     block.classList.add("flag");
-    Tables.tables_set(26, FLAG);
+    Tables.grid[23][23] = FLAG;
 }
