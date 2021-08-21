@@ -13,7 +13,12 @@ class PathTable {
 
         //Information on each block within the html table
         this.grid = new Array(width).fill(new Array(height));
-
+        for (let x = 0; x < width; x++) {
+            for (let y = 0; y < height; y++) {
+                this.grid[x][y] = 0;
+                
+            }
+        }
         //PathFinding Variables
         this.start = Spot(width-2,height-2,0);
         this.end = Spot(1,1,0);
@@ -124,7 +129,7 @@ class PathTable {
             if(this.grid[current.x+1][current.y] != WALL)
                 neighbors.push(Spot(current.x+1,current.y,0))
         if(current.y > 0)
-            if(!this.grid[current.x][current.y-1] == WALL)
+            if(this.grid[current.x][current.y-1] != WALL)
                 neighbors.push(Spot(current.x,current.y-1,0))
             else
                 console.log(this.grid[current.x][current.y-1] +" | " +current.x +" | " + current.y);
