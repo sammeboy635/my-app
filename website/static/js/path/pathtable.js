@@ -12,12 +12,9 @@ class PathTable {
         this.height = height;
 
         //Information on each block within the html table
-        this.grid = new Array(width).fill(new Array(height));
+        this.grid = new Array(width);
         for (let x = 0; x < width; x++) {
-            for (let y = 0; y < height; y++) {
-                this.grid[x][y] = 0;
-                
-            }
+            this.grid[x] = new Array(height);
         }
         //PathFinding Variables
         this.start = Spot(width-2,height-2,0);
@@ -42,8 +39,8 @@ class PathTable {
             this.findBestPath();
             this.drawBlockOpenSet();
             this.drawBlockClosedSet();
-            await sleep(50);
-            if(i > 100){
+            await sleep(10);
+            if(i > 10000){
                 break;
             }
             i++;
@@ -67,18 +64,19 @@ class PathTable {
         }
 
         //Removes from openSet
-        this.openSet.splice(this.openSet.indexOf(current));
+        this.removeOpenSet(current);
         //Adds to closed set
-        this.closedSet.push(current);
+        this.grid[current.x][current.y] = -1
+        //this.closedSet.push(current); debuging!
         //Add to draw for ClosedSet
         this.drawClosedSet.push(current);
 
         let neighbors = this.findCurrentNeighbors(current);
 
         neighbors.forEach(neighbor => {
-            if(!this.closedSet.includes(neighbor)){ //Make sure not evaluated yet
+            if(this.grid[neighbor.x][neighbor.y] != -1){ //Make sure not evaluated yet
                 var tempg = current.g + 1;
-                if(this.openSet.includes(neighbor)){//If its in Openset
+                if(this.compareOpenset(neighbor)){//If its in Openset
                     if(tempg < neighbor.g){ //See if this path has a better Score
                         //Set Prev Location
                         neighbor.cameForm = current;
@@ -96,29 +94,42 @@ class PathTable {
                     neighbor.g = tempg;
                     //Add to openset
                     this.openSet.push(neighbor);
+                    neighbor.h = heuristic(neighbor,this.end) //Calc the distance to end
+                    neighbor.f = neighbor.g + neighbor.h;
                 }
-                neighbor.h = heuristic(neighbor,this.end) //Calc the distance to end
-                neighbor.f = neighbor.g + neighbor.h;
             }
         });
         }else{
             this.stillSearch = false;
         }
     }
-
+    removeOpenSet(spot){
+        let i = 0;
+        this.openSet.forEach(item => {
+            if(item.x == spot.x & item.y == spot.y){
+                this.openSet.splice(i,1);
+                return;
+            }
+            i++;
+        });
+    }
+    compareOpenset(spot){
+        this.openSet.forEach(item => {
+            if(item.x == spot.x & item.y == spot.y){
+                return true;
+            }
+        });
+        return false;
+    }
     findBestOpenSetIndex(){
         let length = this.openSet.length;
         let lowestIndex = 0;
-        array.forEach(spot => {
-            if(spot.f < this.openSet[lowestIndex].f){
+        for(let i = 0; i < length;i++){
+            if(this.openSet[i].f < this.openSet[lowestIndex].f){
                 lowestIndex = i;
             }
-        });
-
-
+        }
         return this.openSet[lowestIndex];
-        
-
     }
     findCurrentNeighbors(current){
         let neighbors = [];
@@ -131,13 +142,9 @@ class PathTable {
         if(current.y > 0)
             if(this.grid[current.x][current.y-1] != WALL)
                 neighbors.push(Spot(current.x,current.y-1,0))
-            else
-                console.log(this.grid[current.x][current.y-1] +" | " +current.x +" | " + current.y);
         if(current.y < this.height-1)
             if(this.grid[current.x][current.y+1] != WALL)
                 neighbors.push(Spot(current.x,current.y+1,0))
-            else
-                console.log("here1")
         return neighbors;
     }
 
