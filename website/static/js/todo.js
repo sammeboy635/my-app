@@ -34,9 +34,15 @@ function createRow(todo){
 function addTodo(){
 
     if(todoInput.value != ""){
-        const newTodo = {index: todoList.length, item: todoInput.value, completed: false};
+        const newTodo = {index: todoList.length, item: htmlEncode(todoInput.value), completed: false};
         createRow(todo = newTodo);
         todoList.push(newTodo);
     }
     todoInput.value = "";
 }
+
+function htmlEncode(str){
+    return String(str).replace(/[^\w. ]/gi, function(c){
+       return '&#'+c.charCodeAt(0)+';';
+    });
+  }

@@ -22,11 +22,10 @@ class PathTable {
         this.openSet = [];
         this.closedSet = [];
         this.path = [];
-        this.stillSearch = true;
+        this.stillSearch = false;
 
         //PathFinding Drawing Vars
-        this.drawOpenSet = [];
-        this.drawClosedSet = [];
+
 
         //Tells if the table has been created in html
         this.loadedTable = false;
@@ -35,10 +34,9 @@ class PathTable {
     async initFinding(sx,sy){
         this.openSet.push(this.start);
         let i = 0;
+        this.stillSearch = true;
         while(this.stillSearch == true){
             this.findBestPath();
-            this.drawBlockOpenSet();
-            this.drawBlockClosedSet();
             await sleep(10);
             if(i > 10000){
                 break;
@@ -59,8 +57,7 @@ class PathTable {
                 temp = temp.cameForm;
             }
             this.stillSearch = false;
-            this.drawBlockPath();
-            console.log("DONE!");
+            this.drawBlockPath();;
         }
 
         //Removes from openSet
@@ -69,7 +66,7 @@ class PathTable {
         this.grid[current.x][current.y] = -1
         //this.closedSet.push(current); debuging!
         //Add to draw for ClosedSet
-        this.drawClosedSet.push(current);
+        this.drawBlock(current.x,current.y,CLOSED);
 
         let neighbors = this.findCurrentNeighbors(current);
 
@@ -85,7 +82,7 @@ class PathTable {
                     }
                 }else{// Not in Openset So set the G and add it to openset
                     //Set the Draw
-                    this.drawOpenSet.push(neighbor);
+                    //this.drawBlock(neighbor.x,neighbor.y,OPEN);
 
                     //Set Prev Location
                     neighbor.cameForm = current;
@@ -101,6 +98,7 @@ class PathTable {
         });
         }else{
             this.stillSearch = false;
+            alert("No Path Was Found!");
         }
     }
     removeOpenSet(spot){
@@ -151,16 +149,7 @@ class PathTable {
 
     
     //---Changing Block
-    drawBlockOpenSet(){
-        this.drawOpenSet.forEach(spot => {
-            this.drawBlock(spot.x,spot.y,OPEN);
-        });
-    }
-    drawBlockClosedSet(){
-        this.drawClosedSet.forEach(spot => {
-            this.drawBlock(spot.x,spot.y,CLOSED);
-        });
-    }
+
     drawBlockPath(){
         this.path.forEach(spot => {
             this.drawBlock(spot.x,spot.y,PATH);
@@ -237,9 +226,21 @@ class PathTable {
         this.htmlTable.remove();
         parentNode.appendChild(newTbody);
 
+        //Html Table
         this.htmlTable = newTbody;
         this.loadedTable = false;
         this.createTable();
+        //Finding path vars being cleared
+        this.stillSearch = false;
+        this.openSet = [];
+        this.closedSet = [];
+        this.path = [];
+        
+        this.grid = new Array(this.width);
+        for (let x = 0; x < this.width; x++) {
+            this.grid[x] = new Array(this.height);
+        }
+
     }
 }
 

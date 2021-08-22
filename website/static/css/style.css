@@ -6,9 +6,8 @@
 }
 .wall {
   border: 1px solid rgb(175, 216, 248);
-  background-color: seagreen;
-  animation-name: visitedAnimation;
-  animation-duration: 1.5s;
+  animation-name: WallAnimation;
+  animation-duration: 0.5s;
   animation-timing-function: ease-out;
   animation-delay: 0;
   animation-direction: alternate;
@@ -20,19 +19,41 @@
 }
 .open {
   border: 1px solid rgb(175, 216, 248);
-  background-color: greenyellow;
+  animation-name: openAnimation;
+  animation-duration: 2s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
   width: 25px;
   height: 25px;
 }
 .closed {
   border: 1px solid rgb(175, 216, 248);
   background-color: blueviolet;
+  animation-name: visitedAnimation;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
   width: 25px;
   height: 25px;
 }
 .path {
   border: 1px solid rgb(175, 216, 248);
-  background-color: blue;
+  animation-name: PathAnimation;
+  animation-duration: 2s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
   width: 25px;
   height: 25px;
 }
@@ -60,4 +81,73 @@
 .center {
   margin-left: auto;
   margin-right: auto;
+}
+
+@keyframes visitedAnimation {
+  0% {
+    transform: scale(0.3);
+    background-color: rgba(0, 0, 66, 0.75);
+    border-radius: 100%;
+  }
+
+  50% {
+    background-color: rgba(17, 104, 217, 0.75);
+  }
+
+  75% {
+    transform: scale(1.2);
+    background-color: rgba(0, 217, 159, 0.75);
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: rgba(0, 190, 218, 0.75);
+  }
+}
+
+@keyframes PathAnimation {
+  0% {
+    transform: scale(0.3);
+    background-color: rgba(164, 209, 162, 0.75);
+    border-radius: 100%;
+  }
+
+  50% {
+    background-color: rgba(146, 202, 145, 0.75);
+  }
+
+  75% {
+    transform: scale(1.2);
+    background-color: rgba(146, 202, 145, 0.801);
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: rgba(123, 193, 126, 0.75);
+  }
+}
+
+@keyframes WallAnimation {
+  0% {
+    transform: scale(0.6);
+    background-color: rgb(150, 1, 68);
+  }
+  20% {
+    transform: scale(0.6);
+    background-color: rgb(119, 1, 54);
+  }
+
+  50% {
+    transform: scale(1.2);
+    background-color: rgb(88, 1, 40);
+  }
+  70% {
+    transform: scale(1.2);
+    background-color: rgb(57, 0, 26);
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: rgba(0, 0, 0, 0.75);
+  }
 }
