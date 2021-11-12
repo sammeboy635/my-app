@@ -1,34 +1,20 @@
 <!-- NAVAGATION -->
 
 <div>
-  <ul class="nav nav-pills justify-content-end">
-    <li class="nav-item">
-      <a class="nav-link {% if active_path == 'home' %}active{% endif %}" aria-current="page" href="/">Home</a>
-    </li>
-    <li class="nav-item">
-      <a
-        class="nav-link {% if active_path == 'path'%}active{% endif %}"
-        href="/path"
-        >Path</a
-      >
-    </li>
-    <li class="nav-item">
-      <a
-        class="nav-link {% if active_path == 'login'%}active{% endif %}"
-        href="/login"
-        >Login</a
-      >
-    <li class="nav-item">
-      <a
-        class="nav-link {% if active_path == 'todo'%}active{% endif %}"
-        href="/todo"
-        >Todo List</a
-      >
-    </li>
-    <li class="nav-item">
-      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"
-        >Disabled</a
-      >
-    </li>
-  </ul>
+    <ul class="nav nav-pills justify-content-end">
+        <li class="nav-item">
+            <a class="nav-link {% if active_path == 'home' %}active{% endif %}" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {% if active_path == 'path'%}active{% endif %}" href="/path">Path</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {% if active_path == 'login'%}active{% endif %}" href="/login">Login</a>
+        <li class="nav-item">
+            <a class="nav-link {% if active_path == 'todo'%}active{% endif %}" href="/todo">Todo List</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {% if active_path == 'life'%}active{% endif %}" href="/life">Life</a>
+        </li>
+    </ul>
 </div>

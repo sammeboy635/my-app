@@ -83,6 +83,27 @@
   margin-right: auto;
 }
 
+/* Life */
+.noLife {
+    border: 1px solid rgb(175, 216, 248);
+    background-color: white;
+    width: 25px;
+    height: 25px;
+  }
+ .life {
+    border: 1px solid rgb(175, 216, 248);
+    animation-name: WallAnimation;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+    width: 25px;
+    height: 25px;
+  }
+
 @keyframes visitedAnimation {
   0% {
     transform: scale(0.3);

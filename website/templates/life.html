@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+#----Navagation
+{% set active_path = 'life' %}
+{%block title%}changed{%endblock title%}
+
+{%block body%}
+<div class="btn-group d-flex container pb-3 pt-3" role="group" aria-label="Button group with nested dropdown">
+    <button type="button" class="btn btn-outline-secondary" id="clearTable">Clear Table</button>
+    <button type="button" class="btn btn-outline-secondary" id="simulation">Run Simulation</button>
+</div>
+<div>
+    <table class="center noselect " oncontextmenu="return false;">
+        <tbody id="life_table">
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript" src="{{ url_for('static', filename='js/life/life_table.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/life/life.js') }}"></script>
+{%endblock body%}
